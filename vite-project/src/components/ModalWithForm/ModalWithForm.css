@@ -32,6 +32,8 @@
   background-color: #ffff;
   position: relative;
   padding: 28px 28px 36px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
 }
 
 .modal__form {

@@ -1,0 +1,46 @@
+.modal__content_type_image {
+  padding: 0;
+}
+
+.modal__image {
+  object-fit: contain;
+  border-radius: 20px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.modal__close {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  cursor: pointer;
+  background-image: ;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+}
+
+.modal__footer {
+  padding-left: 32px;
+  position: relative;
+}
+
+.modal__caption {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.modal__weather {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  margin-bottom: 32px;
+}

@@ -44,6 +44,21 @@ export const weatherOptions = [
     condition: "foggy",
     url: new URL("../assets/night/fog.png", import.meta.url).href,
   },
+  {
+    day: false,
+    condition: "rainy",
+    url: new URL("../assets/night/rainy.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "snowy",
+    url: new URL("../assets/night/snow.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "stormy",
+    url: new URL("../assets/night/storm.png", import.meta.url).href,
+  },
 ];
 
 export const defaultWeatherOptions = {
