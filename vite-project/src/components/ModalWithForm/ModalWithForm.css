@@ -38,12 +38,17 @@
   padding: 28px 28px 36px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal__form {
+  max-width: 496px;
   width: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
 }
 
 .modal__label {
@@ -54,6 +59,7 @@
 }
 
 .modal__input {
+  width: 100%;
   display: block;
   font-size: 16px;
   border: none;
@@ -88,4 +94,12 @@
   background-color: black;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.modal__submit:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal__submit:disabled {
+  background-color: rgba(0, 0, 0, 0.3);
 }
