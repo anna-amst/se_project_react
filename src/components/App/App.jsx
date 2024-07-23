@@ -7,6 +7,7 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
+import Profile from "../Profile/Profile";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import Footer from "../Footer/Footer";
 import { CurrentTempratureUnitContext } from "../../contexts/CurrentTempretureUnitContext";
@@ -58,7 +59,7 @@ function App() {
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
           <Routes>
             <Route path='/*' element={<Main weatherData={weatherData} handleCardClick={handleCardClick} />} />
-            <Route path='/profile' element={<p>Profile</p>} />
+            <Route path='/profile' element={<Profile />} />
           </Routes>
 
           <Footer />

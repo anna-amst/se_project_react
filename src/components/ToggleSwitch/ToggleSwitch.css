@@ -31,14 +31,14 @@
 
 .switch__temp-F {
   position: absolute;
-  top: -9px;
+  top: -12px;
   left: 35px;
   visibility: hidden;
 }
 
 .switch__temp-C {
   position: absolute;
-  top: -9px;
+  top: -12px;
   left: 10px;
   visibility: hidden;
 }
