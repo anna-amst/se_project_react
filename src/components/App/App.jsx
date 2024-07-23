@@ -59,7 +59,7 @@ function App() {
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
           <Routes>
             <Route path='/*' element={<Main weatherData={weatherData} handleCardClick={handleCardClick} />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile' element={<Profile handleCardClick={handleCardClick} />} />
           </Routes>
 
           <Footer />
