@@ -3,24 +3,24 @@ import { useEffect, useState } from "react";
 
 const AddItemModal = ({ onClose, onAddItem, isOpen }) => {
   const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [link, setLink] = useState("");
   const [weather, setWeather] = useState("");
 
-  useEffect(() => {
-    if (isOpen) {
-      setName("");
-      setImageUrl("");
-      setWeather("");
-    }
-  }, [isOpen]);
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     setName("");
+  //     setImageUrl("");
+  //     setWeather("");
+  //   }
+  // }, [isOpen]);
 
   const handleNameChange = (e) => setName(e.target.value);
-  const handleImageUrlChange = (e) => setImageUrl(e.target.value);
+  const handleLinkChange = (e) => setLink(e.target.value);
   const handleWeatherChange = (e) => setWeather(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, imageUrl, weather });
+    onAddItem({ name, link, weather });
   };
 
   return (
@@ -29,7 +29,7 @@ const AddItemModal = ({ onClose, onAddItem, isOpen }) => {
       buttonText="Add garment"
       isOpen={isOpen}
       onClose={onClose}
-      onSubmit={onAddItem}
+      onSubmit={handleSubmit}
     >
       <label htmlFor="name" className="modal__label">
         Name{" "}
@@ -49,8 +49,8 @@ const AddItemModal = ({ onClose, onAddItem, isOpen }) => {
           className="modal__input"
           id="imageUrl"
           placeholder="Image URL"
-          onChange={handleImageUrlChange}
-          value={imageUrl}
+          onChange={handleLinkChange}
+          value={link}
         />
         <fieldset className="modal__radio-buttons">
           <legend className="modal__legend">Select the weather type:</legend>
