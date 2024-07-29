@@ -1,13 +1,11 @@
-.modal__content_type_image {
-  padding: 0;
-}
 
 .modal__image {
   width: 100%;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 20px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  height: 498px;
 }
 
 .modal__close {
@@ -25,7 +23,7 @@
 
 .modal__footer {
   display: flex;
-  padding-left: 32px;
+  padding: 0 32px;
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;

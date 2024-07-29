@@ -14,7 +14,7 @@ function addItem(item) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(item),
+    body: JSON.stringify({name: item.name, imageUrl: item.imageUrl, weather: item.weather}),
   }).then((res) => {
     return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   });

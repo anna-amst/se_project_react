@@ -3,24 +3,24 @@ import { useState, useEffect } from "react";
 
 const AddItemModal = ({ onClose, onAddItem, isOpen, }) => {
   const [name, setName] = useState("");
-  const [link, setLink] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
 
   useEffect(() => {
     if (isOpen) {
       setName("");
-      setLink("");
+      setImageUrl("");
       setWeather("");
     }
   }, [isOpen]);
 
   const handleNameChange = (e) => setName(e.target.value);
-  const handleLinkChange = (e) => setLink(e.target.value);
+  const handleImageUrlChange = (e) => setImageUrl(e.target.value);
   const handleWeatherChange = (e) => setWeather(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, link, weather });
+    onAddItem({ name, imageUrl, weather });
   };
 
   return (
@@ -49,8 +49,8 @@ const AddItemModal = ({ onClose, onAddItem, isOpen, }) => {
           className="modal__input"
           id="imageUrl"
           placeholder="Image URL"
-          onChange={handleLinkChange}
-          value={link}
+          onChange={handleImageUrlChange}
+          value={imageUrl}
         />
         <fieldset className="modal__radio-buttons">
           <legend className="modal__legend">Select the weather type:</legend>

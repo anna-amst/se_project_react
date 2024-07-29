@@ -42,6 +42,10 @@
   flex-direction: column;
 }
 
+.modal__content_type_image {
+  padding: 0;
+}
+
 .modal__form {
   max-width: 496px;
   width: 100%;
