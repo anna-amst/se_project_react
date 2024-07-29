@@ -1,18 +1,18 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-const AddItemModal = ({ onClose, onAddItem, isOpen }) => {
+const AddItemModal = ({ onClose, onAddItem, isOpen, }) => {
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
   const [weather, setWeather] = useState("");
 
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     setName("");
-  //     setImageUrl("");
-  //     setWeather("");
-  //   }
-  // }, [isOpen]);
+  useEffect(() => {
+    if (isOpen) {
+      setName("");
+      setLink("");
+      setWeather("");
+    }
+  }, [isOpen]);
 
   const handleNameChange = (e) => setName(e.target.value);
   const handleLinkChange = (e) => setLink(e.target.value);

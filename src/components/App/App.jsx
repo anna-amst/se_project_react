@@ -42,21 +42,22 @@ function App() {
     setActiveModal("");
   };
 
-  
-
-  const handleAddItemSubmit = (item) => {
-    addItem(item)
-      .then((item) => {
-        setClothingItems([item, ...clothingItems]);
-        closeActiveModal();
+  const onAddItem = (item) => {
+    return addItem(item)
+      .then((newItem) => {
+        setClothingItems((clothingItems) => [...clothingItems, newItem]);
       })
       .catch(console.error);
+  };
+
+  const handleAddItemSubmit = (item) => {
+    onAddItem(item).then(() => closeActiveModal());
   };
 
   const handleDeleteItem = (id) => {
     deleteItem(id)
       .then(() => {
-        setClothingItems(clothingItems.filter(item => item.id !== id));
+        setClothingItems((clothingItems) => clothingItems.filter((item) => item._id !== id));
       })
       .catch(console.error);
   };
