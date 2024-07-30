@@ -1,33 +1,35 @@
 const baseUrl = "http://localhost:3001";
 
-function getItems() {
-  return fetch(`${baseUrl}/items`).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-  });
+function checkResponse(res) {
+  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 }
 
-export { getItems };
+function request(url, options) {
+  return fetch(url, options).then(checkResponse);
+}
+
+function getItems() {
+  return request(`${baseUrl}/items`);
+  }
 
 function addItem(item) {
-  return fetch(`${baseUrl}/items`, {
+  return request(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({name: item.name, imageUrl: item.imageUrl, weather: item.weather}),
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+    body: JSON.stringify({
+      name: item.name,
+      imageUrl: item.imageUrl,
+      weather: item.weather,
+    }),
   });
 }
-
-export { addItem };
 
 function deleteItem(id) {
-  return fetch(`${baseUrl}/items/${id}`, {
+  return request(`${baseUrl}/items/${id}`, {
     method: "DELETE",
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
   });
 }
 
-export { deleteItem };
+export { getItems, addItem, deleteItem };

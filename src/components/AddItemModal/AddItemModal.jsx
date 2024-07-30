@@ -7,13 +7,13 @@ const AddItemModal = ({ onClose, onAddItem, isOpen, }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
 
-  useEffect(() => {
-    if (isOpen) {
-      setName("");
-      setImageUrl("");
-      setWeather("");
-    }
-  }, [isOpen]);
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     setName("");
+  //     setImageUrl("");
+  //     setWeather("");
+  //   }
+  // }, [isOpen]);
 
   const handleNameChange = (e) => setName(e.target.value);
   const handleImageUrlChange = (e) => setImageUrl(e.target.value);
@@ -21,7 +21,11 @@ const AddItemModal = ({ onClose, onAddItem, isOpen, }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, imageUrl, weather });
+    onAddItem({ name, imageUrl, weather }).then(()=> {
+      setName("");
+      setImageUrl("");
+      setWeather("");
+    });
   };
 
   return (

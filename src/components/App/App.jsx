@@ -45,19 +45,17 @@ function App() {
   const onAddItem = (item) => {
     return addItem(item)
       .then((newItem) => {
-        setClothingItems((clothingItems) => [...clothingItems, newItem]);
+        setClothingItems((clothingItems) => [newItem, ...clothingItems]);
+        closeActiveModal();
       })
       .catch(console.error);
-  };
-
-  const handleAddItemSubmit = (item) => {
-    onAddItem(item).then(() => closeActiveModal());
   };
 
   const handleDeleteItem = (id) => {
     deleteItem(id)
       .then(() => {
         setClothingItems((clothingItems) => clothingItems.filter((item) => item._id !== id));
+        closeActiveModal();
       })
       .catch(console.error);
   };
@@ -116,7 +114,7 @@ function App() {
         <AddItemModal
           onClose={closeActiveModal}
           isOpen={activeModal === "add-garment"}
-          onAddItem={handleAddItemSubmit}
+          onAddItem={onAddItem}
         />
 
         <ItemModal
