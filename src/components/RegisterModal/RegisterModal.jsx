@@ -1,19 +1,39 @@
+import { Link } from "react-router-dom";
+import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import "./RegisterModal.css";
 
-const Register = ({ onClose, isOpen, onSubmit }) => {
+const Register = ({ isOpen, handleRegistration }) => {
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    avatarUrl: "",
+  });
+
   if (!isOpen) {
     return null;
   }
 
-  //handleSubmit
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleRegistration(data);
+  };
 
   return (
     <ModalWithForm
       title="Sign Up"
       buttonText="Sign Up"
-      onClose={onClose}
+      onSubmit={handleSubmit}
       isOpen={isOpen}
-      onSubmit={onSubmit}
     >
       <label htmlFor="email" className="modal__label">
         Email*
@@ -24,6 +44,7 @@ const Register = ({ onClose, isOpen, onSubmit }) => {
           placeholder="Email"
           name="email"
           value={data.email}
+          onChange={handleChange}
         />
       </label>
       <label htmlFor="password" className="modal__label">
@@ -35,6 +56,7 @@ const Register = ({ onClose, isOpen, onSubmit }) => {
           placeholder="Password"
           name="password"
           value={data.password}
+          onChange={handleChange}
         />
       </label>
       <label htmlFor="name" className="modal__label">
@@ -46,6 +68,7 @@ const Register = ({ onClose, isOpen, onSubmit }) => {
           placeholder="Name"
           name="name"
           value={data.name}
+          onChange={handleChange}
         />
       </label>
       <label htmlFor="avatarUrl" className="modal__label">
@@ -57,16 +80,19 @@ const Register = ({ onClose, isOpen, onSubmit }) => {
           placeholder="Avatar URL"
           name="avatarUrl"
           value={data.avatarUrl}
+          onChange={handleChange}
         />
       </label>
-      <label className="register__button">
-        <button type="submit"
-        className="register__button"
-        onSubmit{handleSubmit} >Sign up</button>
-      </label>
-      <label className="login__button">
-        
-      </label>
+      <div className="register__button-container">
+        <button type="submit" className="register__link">
+          Sign up
+        </button>
+      </div>
+      <div className="register-signin">
+        <Link to="login" className="register__login-link">
+          Or Log in
+        </Link>
+      </div>
     </ModalWithForm>
   );
 };
