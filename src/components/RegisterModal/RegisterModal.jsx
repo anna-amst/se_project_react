@@ -3,7 +3,7 @@ import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./RegisterModal.css";
 
-const Register = ({ isOpen, handleRegistration }) => {
+const Register = ({ isOpen, handleRegistration, onClose }) => {
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -34,6 +34,7 @@ const Register = ({ isOpen, handleRegistration }) => {
       buttonText="Sign Up"
       onSubmit={handleSubmit}
       isOpen={isOpen}
+      onClose={onClose}
     >
       <label htmlFor="email" className="modal__label">
         Email*

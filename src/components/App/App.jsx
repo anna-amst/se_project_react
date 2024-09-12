@@ -26,12 +26,12 @@ function App() {
     temp: { F: 999, C: 999 },
     city: "",
   });
-  const [activeModal, setActiveModal] = useState("login");
+  const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
   const [userData, setUserData] = useState({ name: "", email: "" });
-  const [isLoggedIn, setIsLoggedIn] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   //const location = useLocation();
 
@@ -87,6 +87,14 @@ function App() {
     setActiveModal("add-garment");
   };
 
+  const handleSignUpClick =() => {
+    setActiveModal("register");
+  }
+
+  const handleLoginClick =() => {
+    setActiveModal("login");
+  }
+
   const closeActiveModal = () => {
     setActiveModal("");
   };
@@ -140,6 +148,9 @@ function App() {
             handleAddClick={handleAddClick}
             weatherData={weatherData}
             isLoggedIn={isLoggedIn}
+            handleLoginClick={handleLoginClick}
+            handleSignUpClick={handleSignUpClick}
+            onClose={closeActiveModal}
           />
           <Routes>
             <Route

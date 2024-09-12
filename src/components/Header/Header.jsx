@@ -6,7 +6,7 @@ import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 
-function Header({ handleAddClick, weatherData, isLoggedIn }) {
+function Header({ handleAddClick, weatherData, isLoggedIn, handleLoginClick, handleSignUpClick }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -46,10 +46,10 @@ function Header({ handleAddClick, weatherData, isLoggedIn }) {
           </Link>
         ) : (
           <div className="header__buttons-container">
-            <button className="header__signup-button" type="button">
+            <button className="header__signup-button" type="button" onClick={handleSignUpClick}>
               Sign Up
             </button>
-            <button className="header__login-button" type="button">
+            <button className="header__login-button" type="button" onClick={handleLoginClick}>
               Log In
             </button>
           </div>
