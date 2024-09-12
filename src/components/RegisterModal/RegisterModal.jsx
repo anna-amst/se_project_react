@@ -87,11 +87,9 @@ const Register = ({ isOpen, handleRegistration }) => {
         <button type="submit" className="register__link">
           Sign up
         </button>
-      </div>
-      <div className="register-signin">
-        <Link to="login" className="register__login-link">
+        <button to="login" className="register__login-link">
           Or Log in
-        </Link>
+        </button>
       </div>
     </ModalWithForm>
   );

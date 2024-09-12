@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import "./LoginModal.css";
 
 const Login = ({ handleLogin, isOpen }) => {
   const [data, setData] = useState({
@@ -50,14 +51,12 @@ const Login = ({ handleLogin, isOpen }) => {
         />
       </label>
       <div className="login__button-container">
-        <button type="submit" className="login__link">
-          Log in
+        <button type="submit" className="register__link">
+          Login In
         </button>
-      </div>
-      <div className="login__signup">
-        <Link to="/register" className="signup__link">
-          Sign up here
-        </Link>
+        <button to="login" className="login__login-link">
+          Or Sign Up
+        </button>
       </div>
     </ModalWithForm>
   );

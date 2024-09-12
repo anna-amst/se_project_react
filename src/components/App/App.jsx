@@ -26,7 +26,7 @@ function App() {
     temp: { F: 999, C: 999 },
     city: "",
   });
-  const [activeModal, setActiveModal] = useState("");
+  const [activeModal, setActiveModal] = useState("register");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
@@ -130,7 +130,7 @@ function App() {
 
   console.log(currentTemperatureUnit);
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    // <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
       <CurrentTempratureUnitContext.Provider
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
@@ -205,7 +205,7 @@ function App() {
         )}
       </CurrentTempratureUnitContext.Provider>
     </div>
-    </CurrentUserContext.Provider>
+    // </CurrentUserContext.Provider>
   );
 }
 
