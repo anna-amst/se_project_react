@@ -8,7 +8,7 @@ const Register = ({ isOpen, handleRegistration }) => {
     name: "",
     email: "",
     password: "",
-    avatarUrl: "",
+    avatar: "",
   });
 
   if (!isOpen) {
@@ -71,15 +71,15 @@ const Register = ({ isOpen, handleRegistration }) => {
           onChange={handleChange}
         />
       </label>
-      <label htmlFor="avatarUrl" className="modal__label">
+      <label htmlFor="avatar" className="modal__label">
         Avatar URL*{" "}
         <input
           type="link"
           className="modal__input"
-          id="avatarUrl"
+          id="avatar"
           placeholder="Avatar URL"
-          name="avatarUrl"
-          value={data.avatarUrl}
+          name="avatar"
+          value={data.avatar}
           onChange={handleChange}
         />
       </label>
