@@ -2,7 +2,7 @@ import SideBar from "../SideBar/SideBar";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import "./Profile.css";
 
-const Profile = ({handleCardClick, weatherData, handleAddClick, clothingItems}) => {
+const Profile = ({handleCardClick, weatherData, handleAddClick, clothingItems, userData}) => {
   return (
     <div className="profile">
       <section className="profile__sidebar">

@@ -16,9 +16,10 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import Register from "../RegisterModal/RegisterModal";
 import Login from "../LoginModal/LoginModal";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import * as api from "../../utils/api";
 
 import * as auth from "../../utils/auth";
-//import { setToken, getToken } from "../../utils/token";
+import { setToken, getToken } from "../../utils/token";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -30,7 +31,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
-  const [userData, setUserData] = useState({ name: "", email: "" });
+  const [currentUser, setCurrentUser] = useState({ name: "", email: "", avatar: "", _id: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   //const location = useLocation();
@@ -41,7 +42,7 @@ function App() {
       .then(() => {
         // close active modal
         // sign in user
-        navigate("/login");
+        handleLogin({email, password});
       })
       .catch(console.error);
   };
@@ -52,26 +53,35 @@ function App() {
     }
 
     auth
-      .authorize(email, password) // name, avatar instead ?? and pass as a context to side bar component
+      .authorize(email, password) 
       .then((data) => {
-        if (data.jwt) {
-          //setToken(data.jwt);
-          setUserData(data.user);
+        console.log(data);
+        if (data.token) {
+          setToken(data.token);
+          setCurrentUser(data.user);
           setIsLoggedIn(true);
+          closeActiveModal();
           navigate("/profile");
         }
       })
       .catch(console.error);
   };
 
-  // useEffect(() => {
-  //   const jwt = getToken();
+  useEffect(() => {
+    const jwt = getToken();
 
-  //   if (!jwt) {
-  //     return;
-  //   }
-  //   // TO Do
-  // }, []);
+    if (!jwt) {
+      return;
+    }
+
+    api.getUserInfo(jwt)
+    .then(({name, avatar}) => {
+      setIsLoggedIn(true);
+      setCurrentUser({name, avatar})
+      navigate("/profile");
+    })
+    .catch(console.error);
+  }, []);
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -87,20 +97,22 @@ function App() {
     setActiveModal("add-garment");
   };
 
-  const handleSignUpClick =() => {
+  const handleSignUpClick = () => {
     setActiveModal("register");
-  }
+  };
 
-  const handleLoginClick =() => {
+  const handleLoginClick = () => {
     setActiveModal("login");
-  }
+  };
 
   const closeActiveModal = () => {
     setActiveModal("");
   };
 
   const onAddItem = (item) => {
-    return addItem(item)
+    const jwt = getToken();
+
+    return addItem(item, jwt)
       .then((newItem) => {
         setClothingItems((clothingItems) => [newItem, ...clothingItems]);
         closeActiveModal();
@@ -138,9 +150,9 @@ function App() {
 
   console.log(currentTemperatureUnit);
   return (
-    // <CurrentUserContext.Provider value={currentUser}>
+     <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
-      <CurrentTempratureUnitContext.Provider
+    <CurrentTempratureUnitContext.Provider
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
         <div className="page__content">
@@ -176,7 +188,6 @@ function App() {
                     handleCardClick={handleCardClick}
                     handleAddClick={handleAddClick}
                     clothingItems={clothingItems}
-                    userData={userData}
                   />
                 </ProtectedRoute>
               }
@@ -220,7 +231,7 @@ function App() {
         )}
       </CurrentTempratureUnitContext.Provider>
     </div>
-    // </CurrentUserContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 

@@ -1,3 +1,5 @@
+import { BASE_URL } from "./auth";
+
 const baseUrl = "http://localhost:3001";
 
 function checkResponse(res) {
@@ -12,11 +14,12 @@ function getItems() {
   return request(`${baseUrl}/items`);
   }
 
-function addItem(item) {
+function addItem(item, token) {
   return request(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
     },
     body: JSON.stringify({
       name: item.name,
@@ -30,6 +33,19 @@ function deleteItem(id) {
   return request(`${baseUrl}/items/${id}`, {
     method: "DELETE",
   });
+}
+
+export const getUserInfo = (token) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    }
+  }).then((res) => {
+    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+  })
 }
 
 export { getItems, addItem, deleteItem };
