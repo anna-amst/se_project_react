@@ -57,3 +57,8 @@
   cursor: pointer;
   padding: 0;
 }
+
+.modal__delete-btn_hidden{
+  visibility: hidden ;
+}
+

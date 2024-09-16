@@ -60,7 +60,7 @@ export const EditProfileModal = ({ onClose, isOpen, handleEditUser }) => {
           onChange={handleChange}
         />
       </label>
-      <button type="submit" className="modal__submit">
+      <button type="submit" className="modal__edit-submit">
         Save changes
       </button>
     </ModalWithForm>

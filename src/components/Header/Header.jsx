@@ -19,7 +19,6 @@ function Header({
   });
 
   const currentUser = useContext(CurrentUserContext);
-  console.log("Current User Context:", currentUser)
 
   return (
     <header className="header">

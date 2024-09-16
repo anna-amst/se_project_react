@@ -82,9 +82,9 @@ function App() {
 
     api
       .getUserInfo(jwt)
-      .then(({ name, avatar }) => {
+      .then(({ name, avatar, _id }) => {
         setIsLoggedIn(true);
-        setCurrentUser({ name, avatar });
+        setCurrentUser({ name, avatar, _id });
         navigate("/profile");
       })
       .catch(console.error);
@@ -136,7 +136,7 @@ function App() {
 
     return addItem(item, jwt)
       .then((newItem) => {
-        setClothingItems((clothingItems) => [newItem, ...clothingItems]);
+        setClothingItems((clothingItems) => [newItem.data, ...clothingItems]);
         closeActiveModal();
       })
       .catch(console.error);

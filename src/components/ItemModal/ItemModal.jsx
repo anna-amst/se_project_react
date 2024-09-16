@@ -4,17 +4,17 @@ import { useContext } from "react";
 
 function ItemModal({ isOpen, onClose, card, onDelete }) {
   const handleDeleteCardClick = () => {
-    console.log('Delete button clicked, card ID:', card._id);
+    console.log("Delete button clicked, card ID:", card._id);
     onDelete(card._id);
   };
 
   const currentUser = useContext(CurrentUserContext);
-  console.log('Current user ID:', currentUser._id);
-  console.log('Card owner ID:', card.owner);
-  
+
   const isOwn = card.owner === currentUser._id;
 
-  const itemDeleteButtonClassName = `modal__delete-btn ${isOwn ? 'modal__delete-btn_visible' : 'modal__delete-btn_hidden'}`;
+  const itemDeleteButtonClassName = `modal__delete-btn ${
+    isOwn ? "modal__delete-btn_visible" : "modal__delete-btn_hidden"
+  }`;
 
   return (
     <div className={`modal ${isOpen && "modal_opened"}`}>
@@ -27,16 +27,17 @@ function ItemModal({ isOpen, onClose, card, onDelete }) {
         <img src={card.imageUrl} alt={card.name} className="modal__image" />
         <div className="modal__footer">
           <div className="modal__footer-description">
-          <h2 className="modal__caption">{card.name}</h2>
-          <p className="modal__weather">Weather: {card.weather}</p>
+            <h2 className="modal__caption">{card.name}</h2>
+            <p className="modal__weather">Weather: {card.weather}</p>
           </div>
+          {isOwn ? (
           <button
             type="button"
             className={itemDeleteButtonClassName}
             onClick={handleDeleteCardClick}
           >
             Delete item
-          </button>
+          </button>) : "" }
         </div>
       </div>
     </div>
