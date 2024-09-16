@@ -12,14 +12,14 @@ function request(url, options) {
 
 function getItems() {
   return request(`${baseUrl}/items`);
-  }
+}
 
 function addItem(item, token) {
   return request(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       name: item.name,
@@ -29,9 +29,18 @@ function addItem(item, token) {
   });
 }
 
-function deleteItem(id) {
+function deleteItem(id, token) {
   return request(`${baseUrl}/items/${id}`, {
     method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`, 
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    if (!res.ok) {
+      return Promise.reject(`Error: ${res.status}`);
+    }
+    return res.json();
   });
 }
 
@@ -42,10 +51,10 @@ export const getUserInfo = (token) => {
       Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
-    }
+    },
   }).then((res) => {
     return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-  })
-}
+  });
+};
 
 export { getItems, addItem, deleteItem };
