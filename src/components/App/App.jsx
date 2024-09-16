@@ -121,6 +121,16 @@ function App() {
     setActiveModal("");
   };
 
+  const handleEditUser = (data) => {
+    const jwt = getToken();
+    api
+      .updateCurrentUser(data, jwt)
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch(console.error);
+  };
+
   const onAddItem = (item) => {
     const jwt = getToken();
 
@@ -133,7 +143,8 @@ function App() {
   };
 
   const handleDeleteItem = (id) => {
-    deleteItem(id)
+    const jwt = getToken();
+    deleteItem(id, jwt)
       .then(() => {
         setClothingItems((clothingItems) =>
           clothingItems.filter((item) => item._id !== id)
@@ -244,13 +255,8 @@ function App() {
           )}
 
           {activeModal === "edit-profile" && (
-            <EditProfileModal
-            isOpen={true}
-              onClose={closeActiveModal}
-
-            />
+            <EditProfileModal isOpen={true} onClose={closeActiveModal} handleEditUser={handleEditUser} />
           )}
-
         </CurrentTempratureUnitContext.Provider>
       </div>
     </CurrentUserContext.Provider>
