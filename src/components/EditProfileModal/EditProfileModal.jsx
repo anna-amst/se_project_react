@@ -32,6 +32,7 @@ export const EditProfileModal = ({ onClose, isOpen, handleEditUser }) => {
       title="Change profile data"
       onClose={onClose}
       onSubmit={handleSubmit}
+      isOpen={isOpen}
     >
       <label htmlFor="name" className="modal__label">
         Name*{" "}
