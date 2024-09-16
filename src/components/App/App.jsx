@@ -44,7 +44,7 @@ function App() {
 
   const handleRegistration = ({ name, email, password, avatar }) => {
     auth
-      .register(name, password, email, avatar)
+      .register(name, password, email, avatar )
       .then(() => {
         // close active modal
         // sign in user
