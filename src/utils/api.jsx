@@ -37,6 +37,26 @@ function deleteItem(id, token) {
   });
 }
 
+function addCardLike(cardId, token) {
+  return request(`${baseUrl}/items/${cardId}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+function removeCardLike(cardId, token) {
+  return request(`${baseUrl}/items/${cardId}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+}
+
 function updateCurrentUser(user, token) {
   return request(`${baseUrl}/users/me`, {
     method: "PATCH",
@@ -67,4 +87,4 @@ export const getUserInfo = (token) => {
 
 
 
-export { getItems, addItem, deleteItem, updateCurrentUser };
+export { getItems, addItem, deleteItem, updateCurrentUser, addCardLike, removeCardLike };

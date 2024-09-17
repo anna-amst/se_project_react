@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 
 function ProtectedRoute({ isLoggedIn, children }) {
   if (!isLoggedIn) {
-    return <Navigate to="/profile" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return children;

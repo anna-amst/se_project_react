@@ -20,7 +20,7 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import * as api from "../../utils/api";
 
 import * as auth from "../../utils/auth";
-import { setToken, getToken } from "../../utils/token";
+import { setToken, getToken, removeToken } from "../../utils/token";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -44,7 +44,7 @@ function App() {
 
   const handleRegistration = ({ name, email, password, avatar }) => {
     auth
-      .register(name, password, email, avatar )
+      .register(name, password, email, avatar)
       .then(() => {
         // close active modal
         // sign in user
@@ -64,10 +64,12 @@ function App() {
         console.log(data);
         if (data.token) {
           setToken(data.token);
-          setCurrentUser(data.user);
-          setIsLoggedIn(true);
-          closeActiveModal();
-          navigate("/profile");
+          api.getUserInfo(data.token).then((userData) => {
+            setCurrentUser(userData);
+            setIsLoggedIn(true);
+            closeActiveModal();
+            navigate("/profile");
+          });
         }
       })
       .catch(console.error);
@@ -89,6 +91,12 @@ function App() {
       })
       .catch(console.error);
   }, []);
+
+  const handleSignOut = () => {
+    removeToken();
+    navigate("/*");
+    setIsLoggedIn(false);
+  };
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -154,6 +162,32 @@ function App() {
       .catch(console.error);
   };
 
+  const handleCardLike = ({ id, isLiked }) => {
+    const jwt = localStorage.getItem("jwt");
+
+    !isLiked
+      ? api
+          .addCardLike(id, jwt)
+          .then((updatedCard) => {
+            console.log(updatedCard);
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard.data : item))
+            );
+          })
+          .catch((err) => console.log(err))
+      : // if not, send a request to remove the user's id from the card's likes array
+        api
+          // the first argument is the card's id
+          .removeCardLike(id, jwt)
+          .then((updatedCard) => {
+            console.log(updatedCard);
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard.data : item))
+            );
+          })
+          .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -191,15 +225,12 @@ function App() {
               <Route
                 path="/*"
                 element={
-                  isLoggedIn ? (
-                    <Main
-                      weatherData={weatherData}
-                      handleCardClick={handleCardClick}
-                      clothingItems={clothingItems}
-                    />
-                  ) : (
-                    <Navigate to="/login" replace />
-                  )
+                  <Main
+                    weatherData={weatherData}
+                    handleCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                    onCardLike={handleCardLike}
+                  />
                 }
               />
               <Route
@@ -212,6 +243,8 @@ function App() {
                       handleAddClick={handleAddClick}
                       clothingItems={clothingItems}
                       handleEditProfileClick={handleEditProfileClick}
+                      handleSignOut={handleSignOut}
+                      onCardLike={handleCardLike}
                     />
                   </ProtectedRoute>
                 }
@@ -255,7 +288,11 @@ function App() {
           )}
 
           {activeModal === "edit-profile" && (
-            <EditProfileModal isOpen={true} onClose={closeActiveModal} handleEditUser={handleEditUser} />
+            <EditProfileModal
+              isOpen={true}
+              onClose={closeActiveModal}
+              handleEditUser={handleEditUser}
+            />
           )}
         </CurrentTempratureUnitContext.Provider>
       </div>

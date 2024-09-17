@@ -3,7 +3,7 @@ import "./ClothesSection.css";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { useContext } from "react";
 
-function ClothesSection({ handleCardClick, handleAddClick, clothingItems }) {
+function ClothesSection({ handleCardClick, handleAddClick, clothingItems, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
   console.log(currentUser);
   console.log(clothingItems);
@@ -28,6 +28,7 @@ function ClothesSection({ handleCardClick, handleAddClick, clothingItems }) {
               key={item._id}
               item={item}
               onCardClick={handleCardClick}
+              onCardLike={onCardLike}
             />
           ))
         ) : (
