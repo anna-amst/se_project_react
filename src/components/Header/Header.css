@@ -68,6 +68,11 @@
   padding: 0;
 }
 
+.header__button_hidden {
+  display: none;
+
+}
+
 .header__link {
   text-decoration: none;
   color: #000;

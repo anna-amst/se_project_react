@@ -162,6 +162,13 @@ function App() {
       .catch(console.error);
   };
 
+  const navigateToLogin = () => {
+    setActiveModal("login");
+  };
+  const navigateToSignUp = () => {
+    setActiveModal("register");
+  };
+
   const handleCardLike = ({ id, isLiked }) => {
     const jwt = localStorage.getItem("jwt");
 
@@ -276,6 +283,7 @@ function App() {
               onClose={closeActiveModal}
               isOpen={true}
               handleRegistration={handleRegistration}
+              navigateToLogin={navigateToLogin}
             />
           )}
 
@@ -284,6 +292,7 @@ function App() {
               onClose={closeActiveModal}
               isOpen={true}
               handleLogin={handleLogin}
+              navigateToSignUp={navigateToSignUp}
             />
           )}
 
