@@ -29,9 +29,7 @@ const Register = ({ isOpen, handleRegistration, onClose, navigateToLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegistration(data).then(() => {
-      onClose();
-    });
+    handleRegistration(data);
   };
 
   return (
@@ -91,11 +89,14 @@ const Register = ({ isOpen, handleRegistration, onClose, navigateToLogin }) => {
         />
       </label>
       <div className="register__button-container">
-        <button type="submit" className={`register__link ${isFormValid() ? 'active' : ""}`}>
+        <button
+          type="submit"
+          className={`register__link ${isFormValid() ? "active" : ""}`}
+        >
           Sign up
         </button>
         <button
-        type="button"
+          type="button"
           to="login"
           className="register__login-link"
           onClick={navigateToLogin}

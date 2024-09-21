@@ -39,7 +39,7 @@ function App() {
     _id: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+
   const navigate = useNavigate();
 
   const handleRegistration = ({ name, email, password, avatar }) => {
@@ -47,6 +47,7 @@ function App() {
       .register(name, password, email, avatar)
       .then(() => {
         handleLogin({ email, password });
+        closeActiveModal();
       })
       .catch(console.error);
   };
@@ -133,6 +134,7 @@ function App() {
       .updateCurrentUser(data, jwt)
       .then((res) => {
         setCurrentUser(res);
+        closeActiveModal();
       })
       .catch(console.error);
   };
