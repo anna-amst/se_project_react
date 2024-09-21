@@ -13,19 +13,23 @@ function ItemCard({ item, onCardClick, onCardLike }) {
 
   const handleLike = () => {
     onCardLike({ id: item._id, isLiked: isLiked });
-  }
+  };
 
   const handleCardClick = () => {
     onCardClick(item);
-  }
+  };
 
   return (
     <li className="card">
       <div className="card__info">
-      <h2 className="card__name">{item.name}</h2>
-      {isLoggedIn && (<button className={itemLikeButtonClassName} onClick={handleLike}>
-    </button>)}
-    </div>
+        <h2 className="card__name">{item.name}</h2>
+        {isLoggedIn && (
+          <button
+            className={itemLikeButtonClassName}
+            onClick={handleLike}
+          ></button>
+        )}
+      </div>
       <img
         onClick={handleCardClick}
         className="card__image"

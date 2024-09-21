@@ -9,6 +9,10 @@ const Login = ({ handleLogin, isOpen, onClose, navigateToSignUp }) => {
     password: "",
   });
 
+  const isFormValid = () => {
+    return  data.email && data.password;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData((prevData) => ({
@@ -19,11 +23,18 @@ const Login = ({ handleLogin, isOpen, onClose, navigateToSignUp }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(data);
+    handleLogin(data).then(() => {
+      onClose();
+    });
   };
 
   return (
-    <ModalWithForm title="Log In" onSubmit={handleSubmit} isOpen={isOpen} onClose={onClose}>
+    <ModalWithForm
+      title="Log In"
+      onSubmit={handleSubmit}
+      isOpen={isOpen}
+      onClose={onClose}
+    >
       <label htmlFor="email" className="modal__label">
         Email*{" "}
         <input
@@ -51,10 +62,15 @@ const Login = ({ handleLogin, isOpen, onClose, navigateToSignUp }) => {
         />
       </label>
       <div className="login__button-container">
-        <button type="submit" className="register__link">
+        <button type="submit" className={`register__link ${isFormValid() ? 'active' : ""}`}>
           Login In
         </button>
-        <button to="login" className="login__login-link" onClick={navigateToSignUp}>
+        <button
+        type="button"
+          to="login"
+          className="login__login-link"
+          onClick={navigateToSignUp}
+        >
           Or Sign Up
         </button>
       </div>

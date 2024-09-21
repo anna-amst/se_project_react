@@ -8,7 +8,7 @@
   font-weight: 700;
 }
 
-.header__logo-and-date{
+.header__logo-and-date {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -45,7 +45,7 @@
   color: white;
 }
 
-.header__switch-and-user{
+.header__switch-and-user {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -70,7 +70,6 @@
 
 .header__button_hidden {
   display: none;
-
 }
 
 .header__link {
@@ -78,13 +77,13 @@
   color: #000;
 }
 
-.header__buttons-container{
+.header__buttons-container {
   display: flex;
   flex-direction: row;
   gap: 10px;
 }
 
-.header__signup-button{
+.header__signup-button {
   border: none;
   width: 73px;
   height: 36px;
@@ -99,7 +98,7 @@
   cursor: pointer;
 }
 
-.header__login-button{
+.header__login-button {
   border: none;
   width: 73px;
   height: 36px;

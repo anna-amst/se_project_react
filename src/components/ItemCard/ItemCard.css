@@ -24,11 +24,11 @@
   object-fit: cover;
 }
 
-.card__info{
+.card__info {
   position: absolute;
-  top: 10px; 
+  top: 10px;
   left: 50%;
-  transform: translateX(-50%); 
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   padding: 0;

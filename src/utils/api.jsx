@@ -31,7 +31,7 @@ function deleteItem(id, token) {
   return request(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: {
-      Authorization: `Bearer ${token}`, 
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });
@@ -80,11 +80,15 @@ export const getUserInfo = (token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-  });
+  }).then(checkResponse);
 };
 
-
-
-export { getItems, addItem, deleteItem, updateCurrentUser, addCardLike, removeCardLike };
+export {
+  getItems,
+  addItem,
+  deleteItem,
+  updateCurrentUser,
+  addCardLike,
+  removeCardLike,
+  request,
+};

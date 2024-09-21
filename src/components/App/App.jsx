@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import "./App.css";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
@@ -39,15 +39,13 @@ function App() {
     _id: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
   const navigate = useNavigate();
-  //const location = useLocation();
 
   const handleRegistration = ({ name, email, password, avatar }) => {
-    auth
+    return auth
       .register(name, password, email, avatar)
       .then(() => {
-        // close active modal
-        // sign in user
         handleLogin({ email, password });
       })
       .catch(console.error);
@@ -58,7 +56,7 @@ function App() {
       return;
     }
 
-    auth
+    return auth
       .authorize(email, password)
       .then((data) => {
         console.log(data);
@@ -131,7 +129,7 @@ function App() {
 
   const handleEditUser = (data) => {
     const jwt = getToken();
-    api
+    return api
       .updateCurrentUser(data, jwt)
       .then((res) => {
         setCurrentUser(res);
@@ -155,7 +153,7 @@ function App() {
     deleteItem(id, jwt)
       .then(() => {
         setClothingItems((clothingItems) =>
-          clothingItems.filter((item) => item._id !== id)
+          clothingItems.filter((item) => item._id !== id),
         );
         closeActiveModal();
       })
@@ -178,7 +176,7 @@ function App() {
           .then((updatedCard) => {
             console.log(updatedCard);
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard.data : item))
+              cards.map((item) => (item._id === id ? updatedCard.data : item)),
             );
           })
           .catch((err) => console.log(err))
@@ -189,7 +187,7 @@ function App() {
           .then((updatedCard) => {
             console.log(updatedCard);
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard.data : item))
+              cards.map((item) => (item._id === id ? updatedCard.data : item)),
             );
           })
           .catch((err) => console.log(err));

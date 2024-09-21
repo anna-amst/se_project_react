@@ -4,7 +4,6 @@ import "./EditProfileModal.css";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 export const EditProfileModal = ({ onClose, isOpen, handleEditUser }) => {
-
   const currentUser = useContext(CurrentUserContext);
   const [data, setData] = useState({
     name: currentUser.name || "",
@@ -31,8 +30,9 @@ export const EditProfileModal = ({ onClose, isOpen, handleEditUser }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(data);
-    handleEditUser(data);
-    onClose();
+    handleEditUser(data).then(() => {
+      onClose();
+    });
   };
 
   return (

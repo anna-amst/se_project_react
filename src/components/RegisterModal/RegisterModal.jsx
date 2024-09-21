@@ -3,7 +3,7 @@ import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./RegisterModal.css";
 
-const Register = ({ isOpen, handleRegistration, onClose, navigateToLogin}) => {
+const Register = ({ isOpen, handleRegistration, onClose, navigateToLogin }) => {
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -15,6 +15,10 @@ const Register = ({ isOpen, handleRegistration, onClose, navigateToLogin}) => {
     return null;
   }
 
+  const isFormValid = () => {
+    return data.name && data.email && data.password && data.avatar;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData((prevData) => ({
@@ -25,7 +29,9 @@ const Register = ({ isOpen, handleRegistration, onClose, navigateToLogin}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleRegistration(data);
+    handleRegistration(data).then(() => {
+      onClose();
+    });
   };
 
   return (
@@ -85,10 +91,15 @@ const Register = ({ isOpen, handleRegistration, onClose, navigateToLogin}) => {
         />
       </label>
       <div className="register__button-container">
-        <button type="submit" className="register__link">
+        <button type="submit" className={`register__link ${isFormValid() ? 'active' : ""}`}>
           Sign up
         </button>
-        <button to="login" className="register__login-link" onClick={navigateToLogin}>
+        <button
+        type="button"
+          to="login"
+          className="register__login-link"
+          onClick={navigateToLogin}
+        >
           Or Log in
         </button>
       </div>
