@@ -1,4 +1,7 @@
-export const BASE_URL = "http://localhost:3001";
+export const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwr.spacetechnology.net"
+    : "http://localhost:3001";
 import { request } from "./api";
 
 export const register = (name, password, email, avatar) => {
